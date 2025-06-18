@@ -1,6 +1,6 @@
 # 👋 Hi, I'm Latera Mekonnen!
 
-🎓 I'm a Computer Science student at Addis Ababa University  
+🎓 I'm aspiring sofware engineer  
 💡 Curious about how technology solves real-world problems  
 🚀 Just getting started with Frontend Development and Java  
 🎯 Aspiring Java Developer | AI & Cloud Enthusiast  

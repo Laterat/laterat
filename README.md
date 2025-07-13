@@ -1,16 +1,15 @@
-# 👋 Hi, I'm Latera Mekonnen!
+# 👋 Hi, I'm Latera 
 
 🎓 I'm aspiring sofware engineer  
 💡 Curious about how technology solves real-world problems  
 🚀 Just getting started with Frontend Development and Java  
-🎯 Aspiring Java Developer | AI & Cloud Enthusiast  
+🎯 Aspiring Java Developer  
 
 ---
 
 🔭 I'm currently learning:
 - Frontend Development (HTML, CSS, JavaScript)
 - Java for backend development
-- Bash scripting and Linux essentials
 - Git & GitHub version control
 
 🌱 My goals:
@@ -20,7 +19,6 @@
 
 📫 Connect with me:  
 - GitHub: [github.com/Laterat](https://github.com/Laterat)  
-- X: [@LateraMekonnen](https://x.com/LateraMekonnen)
 
 ---
 

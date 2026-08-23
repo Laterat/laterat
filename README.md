@@ -6,6 +6,6 @@
 
 <div align="center">
 
-<img src="./assets/streak.svg" alt="GitHub Streak" />
+<img src="https://raw.githubusercontent.com/Laterat/Laterat/main/assets/streak.svg" alt="GitHub Streak" />
 
 </div>

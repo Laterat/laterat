@@ -50,7 +50,9 @@ jobs:
 
           payload = json.dumps({
               "query": query,
-              "variables": {"login": username}
+              "variables": {
+                  "login": username
+              }
           }).encode()
 
           request = urllib.request.Request(
@@ -59,7 +61,7 @@ jobs:
               headers={
                   "Authorization": f"Bearer {token}",
                   "Content-Type": "application/json",
-                  "User-Agent": "github-streak-action"
+                  "User-Agent": "Laterat-GitHub-Streak"
               }
           )
 
@@ -67,98 +69,300 @@ jobs:
               result = json.load(response)
 
           if "errors" in result:
-              raise RuntimeError(result["errors"])
+              raise RuntimeError(
+                  f"GitHub GraphQL error: {result['errors']}"
+              )
 
-          calendar = result["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+          user = result["data"]["user"]
 
-          days = []
+          if not user:
+              raise RuntimeError(
+                  f"GitHub user '{username}' was not found."
+              )
+
+          calendar = (
+              user["contributionsCollection"]
+              ["contributionCalendar"]
+          )
+
+          contributions = {}
 
           for week in calendar["weeks"]:
               for contribution_day in week["contributionDays"]:
-                  days.append(contribution_day)
+                  contribution_date = date.fromisoformat(
+                      contribution_day["date"]
+                  )
 
-          days.sort(key=lambda x: x["date"])
-
-          contributions = {
-              date.fromisoformat(day["date"]): day["contributionCount"]
-              for day in days
-          }
+                  contributions[contribution_date] = (
+                      contribution_day["contributionCount"]
+                  )
 
           today = date.today()
 
+          # ---------------------------------------------------------
           # Current streak
+          #
+          # If today has no contribution yet, start from yesterday.
+          # This prevents the daily workflow from incorrectly showing
+          # 0 while the previous day's streak is still active.
+          # ---------------------------------------------------------
+
+          if contributions.get(today, 0) > 0:
+              cursor = today
+          else:
+              cursor = today - timedelta(days=1)
+
           current_streak = 0
-          cursor = today
 
           while contributions.get(cursor, 0) > 0:
               current_streak += 1
               cursor -= timedelta(days=1)
 
+          # ---------------------------------------------------------
           # Longest streak
-          longest_streak = 0
-          running = 0
+          # ---------------------------------------------------------
 
-          for day in sorted(contributions):
-              if contributions[day] > 0:
-                  running += 1
-                  longest_streak = max(longest_streak, running)
+          longest_streak = 0
+          running_streak = 0
+
+          for contribution_date in sorted(contributions):
+              if contributions[contribution_date] > 0:
+                  running_streak += 1
+                  longest_streak = max(
+                      longest_streak,
+                      running_streak
+                  )
               else:
-                  running = 0
+                  running_streak = 0
 
           total = calendar["totalContributions"]
 
-          svg = f'''<svg width="520" height="120" viewBox="0 0 520 120"
-          xmlns="http://www.w3.org/2000/svg">
-            <rect width="520" height="120" rx="12" fill="#0d1117"/>
+          # ---------------------------------------------------------
+          # SVG
+          # ---------------------------------------------------------
 
-            <text x="28" y="38"
-              fill="#ffffff"
-              font-family="Arial, Helvetica, sans-serif"
+          svg = f'''<svg
+            width="720"
+            height="190"
+            viewBox="0 0 720 190"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="GitHub contribution streak for {username}"
+          >
+
+            <defs>
+              <linearGradient
+                id="accent"
+                x1="0"
+                y1="0"
+                x2="720"
+                y2="0"
+              >
+                <stop offset="0%" stop-color="#ff4500"/>
+                <stop offset="100%" stop-color="#ff6a33"/>
+              </linearGradient>
+
+              <filter
+                id="glow"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
+                <feGaussianBlur
+                  stdDeviation="6"
+                  result="blur"
+                />
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Background -->
+            <rect
+              x="0.5"
+              y="0.5"
+              width="719"
+              height="189"
+              rx="14"
+              fill="#0d1117"
+              stroke="#30363d"
+            />
+
+            <!-- Accent line -->
+            <rect
+              x="0"
+              y="0"
+              width="720"
+              height="3"
+              rx="2"
+              fill="url(#accent)"
+            />
+
+            <!-- Header -->
+            <text
+              x="32"
+              y="42"
+              fill="#f0f6fc"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
               font-size="18"
-              font-weight="700">
-              GitHub Streak
+              font-weight="600"
+              letter-spacing="-0.2"
+            >
+              GitHub activity
             </text>
 
-            <text x="28" y="78"
+            <text
+              x="32"
+              y="65"
+              fill="#8b949e"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="12"
+            >
+              @{username}
+            </text>
+
+            <!-- Current streak -->
+            <text
+              x="32"
+              y="111"
               fill="#ff4500"
-              font-family="Arial, Helvetica, sans-serif"
-              font-size="28"
-              font-weight="700">
-              🔥 {current_streak}
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="32"
+              font-weight="700"
+              letter-spacing="-1"
+              filter="url(#glow)"
+            >
+              {current_streak}
             </text>
 
-            <text x="125" y="78"
-              fill="#8b949e"
-              font-family="Arial, Helvetica, sans-serif"
-              font-size="14">
-              current streak
+            <text
+              x="32"
+              y="134"
+              fill="#c9d1d9"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="12"
+              font-weight="500"
+            >
+              CURRENT STREAK
             </text>
 
-            <text x="28" y="102"
-              fill="#8b949e"
-              font-family="Arial, Helvetica, sans-serif"
-              font-size="13">
-              Longest: {longest_streak} days
+            <!-- Divider -->
+            <line
+              x1="240"
+              y1="82"
+              x2="240"
+              y2="151"
+              stroke="#30363d"
+            />
+
+            <!-- Longest streak -->
+            <text
+              x="272"
+              y="111"
+              fill="#f0f6fc"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="32"
+              font-weight="700"
+              letter-spacing="-1"
+            >
+              {longest_streak}
             </text>
 
-            <text x="360" y="78"
-              fill="#ffffff"
-              font-family="Arial, Helvetica, sans-serif"
-              font-size="22"
-              font-weight="700">
+            <text
+              x="272"
+              y="134"
+              fill="#c9d1d9"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="12"
+              font-weight="500"
+            >
+              LONGEST STREAK
+            </text>
+
+            <!-- Divider -->
+            <line
+              x1="480"
+              y1="82"
+              x2="480"
+              y2="151"
+              stroke="#30363d"
+            />
+
+            <!-- Total contributions -->
+            <text
+              x="512"
+              y="111"
+              fill="#f0f6fc"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="32"
+              font-weight="700"
+              letter-spacing="-1"
+            >
               {total}
             </text>
 
-            <text x="360" y="99"
-              fill="#8b949e"
-              font-family="Arial, Helvetica, sans-serif"
-              font-size="12">
-              contributions
+            <text
+              x="512"
+              y="134"
+              fill="#c9d1d9"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="12"
+              font-weight="500"
+            >
+              CONTRIBUTIONS
             </text>
+
+            <!-- Footer -->
+            <line
+              x1="32"
+              y1="158"
+              x2="688"
+              y2="158"
+              stroke="#21262d"
+            />
+
+            <circle
+              cx="36"
+              cy="174"
+              r="3"
+              fill="#ff4500"
+            />
+
+            <text
+              x="48"
+              y="178"
+              fill="#6e7681"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="10"
+            >
+              Updated daily
+            </text>
+
+            <text
+              x="688"
+              y="178"
+              text-anchor="end"
+              fill="#6e7681"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="10"
+            >
+              GitHub contributions
+            </text>
+
           </svg>
           '''
 
-          with open("assets/streak.svg", "w", encoding="utf-8") as file:
+          os.makedirs("assets", exist_ok=True)
+
+          with open(
+              "assets/streak.svg",
+              "w",
+              encoding="utf-8"
+          ) as file:
               file.write(svg)
 
           print(f"Current streak: {current_streak}")

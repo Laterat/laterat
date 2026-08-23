@@ -35,11 +35,11 @@ jobs:
           token = os.environ["GH_TOKEN"]
           username = os.environ["GITHUB_USERNAME"]
 
-          # Your GitHub contribution history starts here.
-          START_DATE = "2024-11-02T00:00:00Z"
+          # Start of the contribution history shown by your
+          # previous Streak Stats card.
+          START_DATE = date(2024, 11, 2)
 
-          end_date = datetime.now(timezone.utc)
-          end_date_string = end_date.strftime("%Y-%m-%dT%H:%M:%SZ")
+          today = date.today()
 
           query = """
           query(
@@ -67,58 +67,107 @@ jobs:
           }
           """
 
-          payload = json.dumps({
-              "query": query,
-              "variables": {
-                  "login": username,
-                  "from": START_DATE,
-                  "to": end_date_string
-              }
-          }).encode()
+          def fetch_period(start_date, end_date):
+              """
+              GitHub allows a maximum of one year per
+              contributionsCollection query.
+              """
 
-          request = urllib.request.Request(
-              "https://api.github.com/graphql",
-              data=payload,
-              headers={
-                  "Authorization": f"Bearer {token}",
-                  "Content-Type": "application/json",
-                  "User-Agent": "Laterat-GitHub-Streak"
-              }
-          )
-
-          with urllib.request.urlopen(request) as response:
-              result = json.load(response)
-
-          if "errors" in result:
-              raise RuntimeError(
-                  f"GitHub GraphQL error: {result['errors']}"
+              from_datetime = (
+                  f"{start_date.isoformat()}T00:00:00Z"
               )
 
-          user = result["data"]["user"]
-
-          if not user:
-              raise RuntimeError(
-                  f"GitHub user '{username}' was not found."
+              to_datetime = (
+                  f"{end_date.isoformat()}T23:59:59Z"
               )
 
-          calendar = (
-              user["contributionsCollection"]
-              ["contributionCalendar"]
-          )
+              payload = json.dumps({
+                  "query": query,
+                  "variables": {
+                      "login": username,
+                      "from": from_datetime,
+                      "to": to_datetime
+                  }
+              }).encode()
+
+              request = urllib.request.Request(
+                  "https://api.github.com/graphql",
+                  data=payload,
+                  headers={
+                      "Authorization": f"Bearer {token}",
+                      "Content-Type": "application/json",
+                      "User-Agent": "Laterat-GitHub-Streak"
+                  }
+              )
+
+              with urllib.request.urlopen(request) as response:
+                  result = json.load(response)
+
+              if "errors" in result:
+                  raise RuntimeError(
+                      f"GitHub GraphQL error: {result['errors']}"
+                  )
+
+              user = result["data"]["user"]
+
+              if not user:
+                  raise RuntimeError(
+                      f"GitHub user '{username}' was not found."
+                  )
+
+              return (
+                  user["contributionsCollection"]
+                  ["contributionCalendar"]
+              )
+
+
+          # ---------------------------------------------------------
+          # Fetch the entire history in <= 1-year chunks
+          # ---------------------------------------------------------
 
           contributions = {}
+          total_contributions = 0
 
-          for week in calendar["weeks"]:
-              for contribution_day in week["contributionDays"]:
-                  contribution_date = date.fromisoformat(
-                      contribution_day["date"]
-                  )
+          period_start = START_DATE
 
-                  contributions[contribution_date] = (
-                      contribution_day["contributionCount"]
-                  )
+          while period_start <= today:
 
-          today = date.today()
+              # 364 days gives us a safe margin under GitHub's
+              # one-year maximum.
+              period_end = min(
+                  period_start + timedelta(days=364),
+                  today
+              )
+
+              print(
+                  f"Fetching {period_start} → {period_end}"
+              )
+
+              calendar = fetch_period(
+                  period_start,
+                  period_end
+              )
+
+              total_contributions += (
+                  calendar["totalContributions"]
+              )
+
+              for week in calendar["weeks"]:
+                  for contribution_day in week["contributionDays"]:
+
+                      contribution_date = date.fromisoformat(
+                          contribution_day["date"]
+                      )
+
+                      contributions[contribution_date] = (
+                          contribution_day["contributionCount"]
+                      )
+
+              # Move to the next day so periods never overlap.
+              period_start = (
+                  period_end + timedelta(days=1)
+              )
+
 
           # ---------------------------------------------------------
           # Current streak
@@ -135,6 +184,7 @@ jobs:
               current_streak += 1
               cursor -= timedelta(days=1)
 
+
           # ---------------------------------------------------------
           # Longest streak
           # ---------------------------------------------------------
@@ -143,16 +193,18 @@ jobs:
           running_streak = 0
 
           for contribution_date in sorted(contributions):
+
               if contributions[contribution_date] > 0:
                   running_streak += 1
+
                   longest_streak = max(
                       longest_streak,
                       running_streak
                   )
+
               else:
                   running_streak = 0
 
-          total = calendar["totalContributions"]
 
           # ---------------------------------------------------------
           # Generate SVG
@@ -176,8 +228,14 @@ jobs:
                 x2="720"
                 y2="0"
               >
-                <stop offset="0%" stop-color="#ff4500"/>
-                <stop offset="100%" stop-color="#ff6a33"/>
+                <stop
+                  offset="0%"
+                  stop-color="#ff4500"
+                />
+                <stop
+                  offset="100%"
+                  stop-color="#ff6a33"
+                />
               </linearGradient>
 
               <filter
@@ -191,6 +249,7 @@ jobs:
                   stdDeviation="6"
                   result="blur"
                 />
+
                 <feMerge>
                   <feMergeNode in="blur"/>
                   <feMergeNode in="SourceGraphic"/>
@@ -198,7 +257,9 @@ jobs:
               </filter>
             </defs>
 
-            <!-- Background -->
+
+            <!-- Card -->
+
             <rect
               x="0.5"
               y="0.5"
@@ -209,7 +270,9 @@ jobs:
               stroke="#30363d"
             />
 
+
             <!-- Accent -->
+
             <rect
               x="0"
               y="0"
@@ -219,7 +282,9 @@ jobs:
               fill="url(#accent)"
             />
 
+
             <!-- Header -->
+
             <text
               x="32"
               y="42"
@@ -241,7 +306,9 @@ jobs:
               @{username}
             </text>
 
+
             <!-- Current streak -->
+
             <text
               x="32"
               y="111"
@@ -265,7 +332,9 @@ jobs:
               CURRENT STREAK
             </text>
 
+
             <!-- Divider -->
+
             <line
               x1="240"
               y1="82"
@@ -274,7 +343,9 @@ jobs:
               stroke="#30363d"
             />
 
+
             <!-- Longest streak -->
+
             <text
               x="272"
               y="111"
@@ -297,7 +368,9 @@ jobs:
               LONGEST STREAK
             </text>
 
+
             <!-- Divider -->
+
             <line
               x1="480"
               y1="82"
@@ -306,7 +379,9 @@ jobs:
               stroke="#30363d"
             />
 
-            <!-- Total contributions -->
+
+            <!-- Contributions -->
+
             <text
               x="512"
               y="111"
@@ -315,7 +390,7 @@ jobs:
               font-size="32"
               font-weight="700"
             >
-              {total}
+              {total_contributions}
             </text>
 
             <text
@@ -329,7 +404,9 @@ jobs:
               CONTRIBUTIONS
             </text>
 
+
             <!-- Footer -->
+
             <line
               x1="32"
               y1="158"
@@ -367,14 +444,24 @@ jobs:
           ) as file:
               file.write(svg)
 
+
+          # ---------------------------------------------------------
+          # Output
+          # ---------------------------------------------------------
+
+          print("")
           print("========================================")
           print("GitHub Streak")
           print("========================================")
           print(f"Current streak:      {current_streak}")
           print(f"Longest streak:      {longest_streak}")
-          print(f"Total contributions: {total}")
-          print(f"Period:              {START_DATE} → {end_date_string}")
+          print(f"Total contributions: {total_contributions}")
+          print(
+              f"Period:              "
+              f"{START_DATE} → {today}"
+          )
           print("========================================")
+          print("")
           PY
 
       - name: Commit updated streak

@@ -30,17 +30,31 @@ jobs:
           import json
           import os
           import urllib.request
-          from datetime import date, timedelta
+          from datetime import date, datetime, timedelta, timezone
 
           token = os.environ["GH_TOKEN"]
           username = os.environ["GITHUB_USERNAME"]
 
+          # Your GitHub contribution history starts here.
+          START_DATE = "2024-11-02T00:00:00Z"
+
+          end_date = datetime.now(timezone.utc)
+          end_date_string = end_date.strftime("%Y-%m-%dT%H:%M:%SZ")
+
           query = """
-          query($login: String!) {
+          query(
+            $login: String!,
+            $from: DateTime!,
+            $to: DateTime!
+          ) {
             user(login: $login) {
-              contributionsCollection {
+              contributionsCollection(
+                from: $from
+                to: $to
+              ) {
                 contributionCalendar {
                   totalContributions
+
                   weeks {
                     contributionDays {
                       date
@@ -56,7 +70,9 @@ jobs:
           payload = json.dumps({
               "query": query,
               "variables": {
-                  "login": username
+                  "login": username,
+                  "from": START_DATE,
+                  "to": end_date_string
               }
           }).encode()
 
@@ -106,10 +122,6 @@ jobs:
 
           # ---------------------------------------------------------
           # Current streak
-          #
-          # If today has no contribution yet, use yesterday.
-          # This prevents the streak from becoming 0 before today's
-          # contribution has been made.
           # ---------------------------------------------------------
 
           if contributions.get(today, 0) > 0:
@@ -215,7 +227,6 @@ jobs:
               font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
               font-size="18"
               font-weight="600"
-              letter-spacing="-0.2"
             >
               GitHub activity
             </text>
@@ -238,7 +249,6 @@ jobs:
               font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
               font-size="32"
               font-weight="700"
-              letter-spacing="-1"
               filter="url(#glow)"
             >
               {current_streak}
@@ -272,7 +282,6 @@ jobs:
               font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
               font-size="32"
               font-weight="700"
-              letter-spacing="-1"
             >
               {longest_streak}
             </text>
@@ -305,7 +314,6 @@ jobs:
               font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
               font-size="32"
               font-weight="700"
-              letter-spacing="-1"
             >
               {total}
             </text>
@@ -359,9 +367,14 @@ jobs:
           ) as file:
               file.write(svg)
 
-          print(f"Current streak: {current_streak}")
-          print(f"Longest streak: {longest_streak}")
+          print("========================================")
+          print("GitHub Streak")
+          print("========================================")
+          print(f"Current streak:      {current_streak}")
+          print(f"Longest streak:      {longest_streak}")
           print(f"Total contributions: {total}")
+          print(f"Period:              {START_DATE} → {end_date_string}")
+          print("========================================")
           PY
 
       - name: Commit updated streak

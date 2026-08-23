@@ -1,49 +1,213 @@
-<svg width="520" height="120" viewBox="0 0 520 120"
-xmlns="http://www.w3.org/2000/svg">
-  <rect width="520" height="120" rx="12" fill="#0d1117"/>
+<svg
+  width="720"
+  height="190"
+  viewBox="0 0 720 190"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="GitHub contribution streak for Laterat"
+>
 
-  <text x="28" y="38"
-    fill="#ffffff"
-    font-family="Arial, Helvetica, sans-serif"
+  <defs>
+    <linearGradient
+      id="accent"
+      x1="0"
+      y1="0"
+      x2="720"
+      y2="0"
+    >
+      <stop offset="0%" stop-color="#ff4500"/>
+      <stop offset="100%" stop-color="#ff6a33"/>
+    </linearGradient>
+
+    <filter
+      id="glow"
+      x="-50%"
+      y="-50%"
+      width="200%"
+      height="200%"
+    >
+      <feGaussianBlur
+        stdDeviation="6"
+        result="blur"
+      />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect
+    x="0.5"
+    y="0.5"
+    width="719"
+    height="189"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <!-- Accent line -->
+  <rect
+    x="0"
+    y="0"
+    width="720"
+    height="3"
+    rx="2"
+    fill="url(#accent)"
+  />
+
+  <!-- Header -->
+  <text
+    x="32"
+    y="42"
+    fill="#f0f6fc"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
     font-size="18"
-    font-weight="700">
-    GitHub Streak
+    font-weight="600"
+    letter-spacing="-0.2"
+  >
+    GitHub activity
   </text>
 
-  <text x="28" y="78"
+  <text
+    x="32"
+    y="65"
+    fill="#8b949e"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="12"
+  >
+    @Laterat
+  </text>
+
+  <!-- Current streak -->
+  <text
+    x="32"
+    y="111"
     fill="#ff4500"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="28"
-    font-weight="700">
-    🔥 7
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="32"
+    font-weight="700"
+    letter-spacing="-1"
+    filter="url(#glow)"
+  >
+    7
   </text>
 
-  <text x="125" y="78"
-    fill="#8b949e"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="14">
-    current streak
+  <text
+    x="32"
+    y="134"
+    fill="#c9d1d9"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="12"
+    font-weight="500"
+  >
+    CURRENT STREAK
   </text>
 
-  <text x="28" y="102"
-    fill="#8b949e"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="13">
-    Longest: 58 days
+  <!-- Divider -->
+  <line
+    x1="240"
+    y1="82"
+    x2="240"
+    y2="151"
+    stroke="#30363d"
+  />
+
+  <!-- Longest streak -->
+  <text
+    x="272"
+    y="111"
+    fill="#f0f6fc"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="32"
+    font-weight="700"
+    letter-spacing="-1"
+  >
+    58
   </text>
 
-  <text x="360" y="78"
-    fill="#ffffff"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="22"
-    font-weight="700">
-    473
+  <text
+    x="272"
+    y="134"
+    fill="#c9d1d9"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="12"
+    font-weight="500"
+  >
+    LONGEST STREAK
   </text>
 
-  <text x="360" y="99"
-    fill="#8b949e"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="12">
-    contributions
+  <!-- Divider -->
+  <line
+    x1="480"
+    y1="82"
+    x2="480"
+    y2="151"
+    stroke="#30363d"
+  />
+
+  <!-- Total contributions -->
+  <text
+    x="512"
+    y="111"
+    fill="#f0f6fc"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="32"
+    font-weight="700"
+    letter-spacing="-1"
+  >
+    475
   </text>
+
+  <text
+    x="512"
+    y="134"
+    fill="#c9d1d9"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="12"
+    font-weight="500"
+  >
+    CONTRIBUTIONS
+  </text>
+
+  <!-- Footer -->
+  <line
+    x1="32"
+    y1="158"
+    x2="688"
+    y2="158"
+    stroke="#21262d"
+  />
+
+  <circle
+    cx="36"
+    cy="174"
+    r="3"
+    fill="#ff4500"
+  />
+
+  <text
+    x="48"
+    y="178"
+    fill="#6e7681"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="10"
+  >
+    Updated daily
+  </text>
+
+  <text
+    x="688"
+    y="178"
+    text-anchor="end"
+    fill="#6e7681"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="10"
+  >
+    GitHub contributions
+  </text>
+
 </svg>

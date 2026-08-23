@@ -1,1 +1,49 @@
+<svg width="520" height="120" viewBox="0 0 520 120"
+xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="120" rx="12" fill="#0d1117"/>
 
+  <text x="28" y="38"
+    fill="#ffffff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="18"
+    font-weight="700">
+    GitHub Streak
+  </text>
+
+  <text x="28" y="78"
+    fill="#ff4500"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="28"
+    font-weight="700">
+    🔥 7
+  </text>
+
+  <text x="125" y="78"
+    fill="#8b949e"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="14">
+    current streak
+  </text>
+
+  <text x="28" y="102"
+    fill="#8b949e"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="13">
+    Longest: 58 days
+  </text>
+
+  <text x="360" y="78"
+    fill="#ffffff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="22"
+    font-weight="700">
+    473
+  </text>
+
+  <text x="360" y="99"
+    fill="#8b949e"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="12">
+    contributions
+  </text>
+</svg>

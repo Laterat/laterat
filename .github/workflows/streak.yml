@@ -1,0 +1,181 @@
+name: Update GitHub Streak
+
+on:
+  schedule:
+    - cron: "15 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  streak:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Calculate streak and generate SVG
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: Laterat
+        run: |
+          python3 <<'PY'
+          import json
+          import os
+          import urllib.request
+          from datetime import date, timedelta
+
+          token = os.environ["GH_TOKEN"]
+          username = os.environ["GITHUB_USERNAME"]
+
+          query = """
+          query($login: String!) {
+            user(login: $login) {
+              contributionsCollection {
+                contributionCalendar {
+                  totalContributions
+                  weeks {
+                    contributionDays {
+                      date
+                      contributionCount
+                    }
+                  }
+                }
+              }
+            }
+          }
+          """
+
+          payload = json.dumps({
+              "query": query,
+              "variables": {"login": username}
+          }).encode()
+
+          request = urllib.request.Request(
+              "https://api.github.com/graphql",
+              data=payload,
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Content-Type": "application/json",
+                  "User-Agent": "github-streak-action"
+              }
+          )
+
+          with urllib.request.urlopen(request) as response:
+              result = json.load(response)
+
+          if "errors" in result:
+              raise RuntimeError(result["errors"])
+
+          calendar = result["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+
+          days = []
+
+          for week in calendar["weeks"]:
+              for contribution_day in week["contributionDays"]:
+                  days.append(contribution_day)
+
+          days.sort(key=lambda x: x["date"])
+
+          contributions = {
+              date.fromisoformat(day["date"]): day["contributionCount"]
+              for day in days
+          }
+
+          today = date.today()
+
+          # Current streak
+          current_streak = 0
+          cursor = today
+
+          while contributions.get(cursor, 0) > 0:
+              current_streak += 1
+              cursor -= timedelta(days=1)
+
+          # Longest streak
+          longest_streak = 0
+          running = 0
+
+          for day in sorted(contributions):
+              if contributions[day] > 0:
+                  running += 1
+                  longest_streak = max(longest_streak, running)
+              else:
+                  running = 0
+
+          total = calendar["totalContributions"]
+
+          svg = f'''<svg width="520" height="120" viewBox="0 0 520 120"
+          xmlns="http://www.w3.org/2000/svg">
+            <rect width="520" height="120" rx="12" fill="#0d1117"/>
+
+            <text x="28" y="38"
+              fill="#ffffff"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="18"
+              font-weight="700">
+              GitHub Streak
+            </text>
+
+            <text x="28" y="78"
+              fill="#ff4500"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="28"
+              font-weight="700">
+              🔥 {current_streak}
+            </text>
+
+            <text x="125" y="78"
+              fill="#8b949e"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="14">
+              current streak
+            </text>
+
+            <text x="28" y="102"
+              fill="#8b949e"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="13">
+              Longest: {longest_streak} days
+            </text>
+
+            <text x="360" y="78"
+              fill="#ffffff"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="22"
+              font-weight="700">
+              {total}
+            </text>
+
+            <text x="360" y="99"
+              fill="#8b949e"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="12">
+              contributions
+            </text>
+          </svg>
+          '''
+
+          with open("assets/streak.svg", "w", encoding="utf-8") as file:
+              file.write(svg)
+
+          print(f"Current streak: {current_streak}")
+          print(f"Longest streak: {longest_streak}")
+          print(f"Total contributions: {total}")
+          PY
+
+      - name: Commit updated streak
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add assets/streak.svg
+
+          if git diff --cached --quiet; then
+            echo "No streak changes."
+          else
+            git commit -m "chore: update GitHub streak"
+            git push
+          fi

@@ -4,4 +4,8 @@
 
 ### GitHub
 
-[![GitHub](https://img.shields.io/badge/GitHub-Laterat-0d1117?style=flat&logo=github)](https://github.com/Laterat)
+<div align="center">
+
+<img src="./assets/streak.svg" alt="GitHub Streak" />
+
+</div>

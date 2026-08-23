@@ -3,4 +3,4 @@
 🎓 I'm aspiring Developer 
 
 
-[![GitHub Streak](https://streak-stats.demolab.com/?user=Laterat)](https://git.io/streak-stats)
+<img src="https://streak-stats.demolab.com?user=Laterat&theme=dark&hide_border=true&border_radius=11.3" alt="GitHub Streak" />

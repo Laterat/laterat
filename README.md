@@ -2,7 +2,7 @@
 
 🎓 I'm aspiring Developer 
 
-### GitHub g
+
 
 <div align="center">
 

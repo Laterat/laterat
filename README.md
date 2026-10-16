@@ -1,4 +1,4 @@
-# 👋 Hi, I'm Latera Tilahun, computer science student
+# 👋 Hi, I'm Latera Tilahun, computer science student at AAU
 
 🎓 I'm aspiring Developer 
 

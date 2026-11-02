@@ -8,10 +8,10 @@ TOKEN = os.environ.get("GH_TOKEN", "")
 OUT = os.environ.get("OUT_DIR", "assets")
 DEMO = os.environ.get("DEMO") == "1"
 
-BG, BORDER, TITLE, TEXT, MUTED, ACCENT = "#1a120b", "#4a2c17", "#e8a33d", "#f1e4cf", "#c8a27a", "#c8553d"
-HEAT = ["#2b1d12", "#4a2c17", "#8a4b25", "#c8553d", "#e8a33d"]
+BG, BORDER, TITLE, TEXT, MUTED, ACCENT = "#1a120b", "#3a2616", "#f2c14e", "#f1e4cf", "#bfa27a", "#e8a33d"
+HEAT = ["#2b1d12", "#5a4220", "#8f7a35", "#c9a83f", "#f2c14e"]
 FONT = "ui-monospace, 'Fira Code', Menlo, Consolas, 'DejaVu Sans Mono', monospace"
-LANG_COLORS = ["#e8a33d", "#c8553d", "#d98b4a", "#a8683a", "#8a4b25", "#c8a27a", "#6b3a1a"]
+LANG_COLORS = ["#f2c14e", "#b5c46a", "#e8a33d", "#8fa855", "#d9c7a3", "#6f7f45", "#a8895a"]
 
 
 def api(url, data=None):

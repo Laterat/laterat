@@ -1,20 +1,19 @@
-
 <!-- Banner -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,50:302b63,100:24243e&height=220&section=header&text=Nkruame&fontSize=70&fontColor=ffffff&fontAlignY=38&desc=Latera%20Tilahun%20Mekonnen&descSize=18&descAlignY=58&animation=fadeIn" alt="banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a120b,60:4a2c17,100:c8553d&height=220&section=header&text=Nkruame&fontSize=70&fontColor=f1e4cf&fontAlignY=38&desc=Latera%20Tilahun%20Mekonnen&descSize=18&descAlignY=58&animation=fadeIn" alt="banner" />
 </p>
 
 <!-- Typing animation -->
 <p align="center">
   <a href="https://github.com/Laterat">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&duration=3000&pause=1000&color=A78BFA&center=true&vCenter=true&width=520&lines=Computer+Science+%40+Addis+Ababa+University;Full-stack+developer;I+turn+real+problems+into+real+products;Open+to+internships" alt="typing" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&duration=3000&pause=1000&color=E8A33D&center=true&vCenter=true&width=520&lines=Computer+Science+%40+Addis+Ababa+University;Full-stack+developer;I+turn+real+problems+into+real+products;Open+to+internships" alt="typing" />
   </a>
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=Laterat&label=Profile+views&color=7c3aed&style=flat-square" alt="views" />
-  <img src="https://img.shields.io/badge/Addis_Ababa-Ethiopia-302b63?style=flat-square&logo=googlemaps&logoColor=white" alt="location" />
-  <img src="https://img.shields.io/github/followers/Laterat?style=flat-square&color=302b63&logo=github" alt="followers" />
+  <img src="https://komarev.com/ghpvc/?username=Laterat&label=Profile+views&color=c8553d&style=flat-square" alt="views" />
+  <img src="https://img.shields.io/badge/Addis_Ababa-Ethiopia-4a2c17?style=flat-square&logo=googlemaps&logoColor=white" alt="location" />
+  <img src="https://img.shields.io/github/followers/Laterat?style=flat-square&color=4a2c17&logo=github" alt="followers" />
 </p>
 
 <br>
@@ -29,6 +28,7 @@ const nkruame = {
   location: "Addis Ababa, Ethiopia",
   focus:    ["Full-stack", "Backend", "Systems & Networks"],
   building: "software that people actually use",
+  fuel:     "Ethiopian coffee ☕",
   lookingFor: "internships & real-world projects",
 };
 ```
@@ -77,16 +77,16 @@ const nkruame = {
 ## `> stats`
 
 <p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Laterat&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0f0c29&title_color=a78bfa&icon_color=7c3aed&text_color=c9d1d9" alt="stats" />
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Laterat&layout=compact&theme=tokyonight&hide_border=true&bg_color=0f0c29&title_color=a78bfa&text_color=c9d1d9" alt="top langs" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Laterat&show_icons=true&hide_border=true&bg_color=1a120b&title_color=e8a33d&icon_color=c8553d&text_color=f1e4cf" alt="stats" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Laterat&layout=compact&hide_border=true&bg_color=1a120b&title_color=e8a33d&text_color=f1e4cf" alt="top langs" />
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=Laterat&theme=tokyonight&hide_border=true&background=0f0c29&ring=a78bfa&fire=7c3aed&currStreakLabel=a78bfa" alt="streak" />
+  <img src="https://streak-stats.demolab.com?user=Laterat&hide_border=true&background=1a120b&ring=e8a33d&fire=c8553d&currStreakNum=f1e4cf&currStreakLabel=e8a33d&sideNums=f1e4cf&sideLabels=c8a27a&dates=8a6a4a" alt="streak" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Laterat&bg_color=0f0c29&color=a78bfa&line=7c3aed&point=ffffff&area=true&hide_border=true" alt="activity graph" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Laterat&bg_color=1a120b&color=e8a33d&line=c8553d&point=f1e4cf&area=true&hide_border=true" alt="activity graph" />
 </p>
 
 <br>
@@ -94,14 +94,14 @@ const nkruame = {
 ## `> connect`
 
 <p align="center">
-  <a href="https://github.com/Laterat"><img src="https://img.shields.io/badge/GitHub-Laterat-24243e?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+  <a href="https://github.com/Laterat"><img src="https://img.shields.io/badge/GitHub-Laterat-2b1d12?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
   <!-- Add yours:
-  <a href="https://linkedin.com/in/YOUR-HANDLE"><img src="https://img.shields.io/badge/LinkedIn-302b63?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-  <a href="mailto:YOUR@EMAIL.com"><img src="https://img.shields.io/badge/Email-7c3aed?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  <a href="https://linkedin.com/in/YOUR-HANDLE"><img src="https://img.shields.io/badge/LinkedIn-4a2c17?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+  <a href="mailto:YOUR@EMAIL.com"><img src="https://img.shields.io/badge/Email-c8553d?style=for-the-badge&logo=gmail&logoColor=white" /></a>
   -->
 </p>
 
 <!-- Footer -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:24243e,50:302b63,100:0f0c29&height=120&section=footer" alt="footer" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:c8553d,40:4a2c17,100:1a120b&height=120&section=footer" alt="footer" />
 </p>

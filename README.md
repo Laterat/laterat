@@ -38,7 +38,7 @@ const nkruame = {
 ## `> stack`
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=ts,js,react,nestjs,nodejs,php,mysql,postgres,prisma,cpp,flutter,dart,git,github,linux,figma&perline=8&theme=dark" alt="skills" />
+  <img src="https://skillicons.dev/icons?i=ts,js,react,nestjs,nodejs,php,mysql,postgres,prisma,cpp,java,flutter,dart,git,linux,figma&perline=8&theme=dark" alt="skills" />
 </p>
 
 <br>
@@ -48,29 +48,31 @@ const nkruame = {
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h3>🚚 Fleet Management System</h3>
-      <p>Fleet and vehicle management platform with auth, role-based access, and a modern React dashboard.</p>
-      <sub><code>NestJS</code> · <code>Prisma</code> · <code>PostgreSQL</code> · <code>React 19</code></sub>
+      <h3>🛒 <a href="https://github.com/Laterat/snapmart">SnapMart</a></h3>
+      <p>Full-stack e-commerce platform with a separate backend and frontend, deployed live.</p>
+      <sub><code>TypeScript</code> · <a href="https://snapmart-eta.vercel.app">Live demo</a></sub>
     </td>
     <td width="50%" valign="top">
-      <h3>💊 Pharmacy Management</h3>
-      <p>Inventory, dispensing, and expiry monitoring with RBAC and security hardening. Zero frameworks.</p>
-      <sub><code>PHP</code> · <code>MySQL</code> · <code>AJAX</code></sub>
+      <h3>💊 <a href="https://github.com/Laterat/pharmacy_managemnt_system">ASD Pharmacy Management</a></h3>
+      <p>Pharmacy back-office and POS with role-based access, CSRF protection, and batch-aware stock deduction by earliest expiry. No frameworks.</p>
+      <sub><code>PHP</code> · <code>MySQL</code> · <code>Vanilla JS</code></sub>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <h3>🗺️ Connect-Ethio</h3>
-      <p>Social network pathfinder that finds connections between people using graph traversal.</p>
-      <sub><code>C++</code> · <code>BFS</code> · <code>DFS</code></sub>
+      <h3>🏥 <a href="https://github.com/Laterat/Hospital-Queue-Management">Hospital Queue Management</a></h3>
+      <p>Console app with role-based logins for admins, receptionists and doctors, and emergency patients prioritized in a circular queue.</p>
+      <sub><code>C++</code> · <code>Linked list</code> · <code>Circular queue</code></sub>
     </td>
     <td width="50%" valign="top">
-      <h3>💸 SaveTogether</h3>
-      <p>Web app for community savings groups. Currently in the planning and build-out phase.</p>
-      <sub><code>Web</code> · <code>In progress</code></sub>
+      <h3>🥬 <a href="https://github.com/Laterat/Door-to-Door-Grocery-MS">Door-to-Door Grocery</a></h3>
+      <p>Desktop grocery delivery system with separate customer, agent, manager and admin dashboards.</p>
+      <sub><code>Java Swing</code> · <code>JDBC</code> · <code>SQL Server</code></sub>
     </td>
   </tr>
 </table>
+
+<p align="center"><sub><a href="https://github.com/Laterat?tab=repositories">See all 38 repositories →</a></sub></p>
 
 <br>
 

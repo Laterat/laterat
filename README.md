@@ -97,10 +97,8 @@ const nkruame = {
 
 <p align="center">
   <a href="https://github.com/Laterat"><img src="https://img.shields.io/badge/GitHub-Laterat-2b1d12?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
-  <!-- Add yours:
-  <a href="https://linkedin.com/in/YOUR-HANDLE"><img src="https://img.shields.io/badge/LinkedIn-4a2c17?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-  <a href="mailto:YOUR@EMAIL.com"><img src="https://img.shields.io/badge/Email-c8553d?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  -->
+  <a href="https://www.linkedin.com/in/latera-mekonnen/"><img src="https://img.shields.io/badge/LinkedIn-latera--mekonnen-4a2c17?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="mailto:mekonnenlatera@gmail.com"><img src="https://img.shields.io/badge/Email-mekonnenlatera@gmail.com-c8553d?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
 </p>
 
 <!-- Footer -->

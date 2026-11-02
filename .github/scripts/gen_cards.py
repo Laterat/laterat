@@ -8,10 +8,10 @@ TOKEN = os.environ.get("GH_TOKEN", "")
 OUT = os.environ.get("OUT_DIR", "assets")
 DEMO = os.environ.get("DEMO") == "1"
 
-BG, BORDER, TITLE, TEXT, MUTED, ACCENT = "#1a120b", "#3a2616", "#f2c14e", "#f1e4cf", "#bfa27a", "#e8a33d"
-HEAT = ["#2b1d12", "#5a4220", "#8f7a35", "#c9a83f", "#f2c14e"]
+BG, BORDER, TITLE, TEXT, MUTED, ACCENT = "#0d1117", "#30363d", "#3fb950", "#e6edf3", "#8b949e", "#3fb950"
+HEAT = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
 FONT = "ui-monospace, 'Fira Code', Menlo, Consolas, 'DejaVu Sans Mono', monospace"
-LANG_COLORS = ["#f2c14e", "#b5c46a", "#e8a33d", "#8fa855", "#d9c7a3", "#6f7f45", "#a8895a"]
+LANG_COLORS = ["#3fb950", "#e6edf3", "#26a641", "#8b949e", "#7ee787", "#6e7681", "#0e8a3b"]
 
 
 def api(url, data=None):
@@ -124,7 +124,7 @@ for i, (k, v) in enumerate(top):
     w = max(2, bar_w * v / total)
     body += f'<rect x="{x:.1f}" y="48" width="{w:.1f}" height="8" fill="{LANG_COLORS[i % len(LANG_COLORS)]}"/>'
     x += w
-body += f'<rect x="{x:.1f}" y="48" width="{max(0, 24 + bar_w - x):.1f}" height="8" fill="#3a2616"/>'
+body += f'<rect x="{x:.1f}" y="48" width="{max(0, 24 + bar_w - x):.1f}" height="8" fill="#21262d"/>'
 body = f'<clipPath id="c"><rect x="24" y="48" width="{bar_w}" height="8" rx="4"/></clipPath><g clip-path="url(#c)">{body}</g>'
 for i, (k, v) in enumerate(top):
     col, row = i % 2, i // 2

@@ -1,6 +1,6 @@
 <!-- Banner -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a120b,60:4a2c17,100:c8553d&height=220&section=header&text=Latera&fontSize=70&fontColor=f1e4cf&fontAlignY=38&desc=Latera%20Tilahun%20Mekonnen&descSize=18&descAlignY=58&animation=fadeIn" alt="banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a120b,60:4a2c17,100:c8553d&height=220&section=header&text=Nkruame&fontSize=70&fontColor=f1e4cf&fontAlignY=38&desc=Latera%20Tilahun%20Mekonnen&descSize=18&descAlignY=58&animation=fadeIn" alt="banner" />
 </p>
 
 <!-- Typing animation -->
@@ -21,7 +21,7 @@
 ## `> whoami`
 
 ```ts
-const Latera = {
+const nkruame = {
   name:     "Latera Tilahun Mekonnen",
   school:   "Addis Ababa University",
   major:    "Computer Science",
@@ -79,8 +79,8 @@ const Latera = {
 ## `> stats`
 
 <p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Laterat&show_icons=true&hide_border=true&bg_color=1a120b&title_color=e8a33d&icon_color=c8553d&text_color=f1e4cf" alt="stats" />
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Laterat&layout=compact&hide_border=true&bg_color=1a120b&title_color=e8a33d&text_color=f1e4cf" alt="top langs" />
+  <img src="assets/stats.svg" alt="GitHub stats" />
+  <img src="assets/langs.svg" alt="Top languages" />
 </p>
 
 <p align="center">
@@ -88,7 +88,7 @@ const Latera = {
 </p>
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Laterat&bg_color=1a120b&color=e8a33d&line=c8553d&point=f1e4cf&area=true&hide_border=true" alt="activity graph" />
+  <img src="assets/activity.svg" alt="Contribution activity" />
 </p>
 
 <br>

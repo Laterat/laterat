@@ -1,6 +1,6 @@
 <!-- Banner -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a120b,60:4a2c17,100:c8553d&height=220&section=header&text=Nkruame&fontSize=70&fontColor=f1e4cf&fontAlignY=38&desc=Latera%20Tilahun%20Mekonnen&descSize=18&descAlignY=58&animation=fadeIn" alt="banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a120b,60:4a2c17,100:c8553d&height=220&section=header&text=Latera&fontSize=70&fontColor=f1e4cf&fontAlignY=38&desc=Latera%20Tilahun%20Mekonnen&descSize=18&descAlignY=58&animation=fadeIn" alt="banner" />
 </p>
 
 <!-- Typing animation -->
@@ -21,7 +21,7 @@
 ## `> whoami`
 
 ```ts
-const nkruame = {
+const Latera = {
   name:     "Latera Tilahun Mekonnen",
   school:   "Addis Ababa University",
   major:    "Computer Science",

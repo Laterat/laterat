@@ -44,7 +44,7 @@ I enjoy working across the stack, from designing interfaces to developing backen
 ```ts
 
 
----
+
 
 <!-- ==================== TECH STACK ==================== -->
 

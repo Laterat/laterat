@@ -41,7 +41,6 @@ I'm a Computer Science student at **Addis Ababa University**, interested in buil
 
 I enjoy working across the stack, from designing interfaces to developing backend services, modeling databases, and solving problems through software.
 
-```ts
 
 
 

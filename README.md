@@ -42,23 +42,7 @@ I'm a Computer Science student at **Addis Ababa University**, interested in buil
 I enjoy working across the stack, from designing interfaces to developing backend services, modeling databases, and solving problems through software.
 
 ```ts
-const latera = {
-  name: "Latera Tilahun Mekonnen",
-  education: "Computer Science @ Addis Ababa University",
-  location: "Addis Ababa, Ethiopia",
 
-  interests: [
-    "Full-Stack Development",
-    "Backend Engineering",
-    "Database Design",
-    "Systems & Networking",
-  ],
-
-  currently: "Building and improving real-world applications",
-
-  philosophy: "Learn deeply. Build carefully. Improve continuously.",
-};
-```
 
 ---
 

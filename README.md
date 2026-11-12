@@ -12,7 +12,7 @@
 <h1 align="center">Hi, I'm Latera 👋</h1>
 
 <h3 align="center">
-  Computer Science Student · Full-Stack Developer · Problem Solver
+  Creative Developer
 </h3>
 
 <p align="center">
@@ -37,7 +37,7 @@
 
 ## `01 / About me`
 
-I'm a Computer Science student at **Addis Ababa University**, interested in building practical software systems and understanding how things work under the hood.
+Interested in building practical software systems and understanding how things work under the hood.
 
 I enjoy working across the stack, from designing interfaces to developing backend services, modeling databases, and solving problems through software.
 
